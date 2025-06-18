@@ -1,0 +1,159 @@
+.spotify-playlist {
+  /* border: 2px solid white; */
+  /* height: 271px; */
+  margin-bottom: 15px;
+}
+
+.cards-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.cards {
+  /* border: 2px solid red; */
+  height: auto;
+  width: 100%;
+  display: flex;
+  gap: 1.4vw;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+/* Shadow base styles */
+.cards-wrapper::before,
+.cards-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0; /* Start invisible */
+}
+
+.cards-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #121212, transparent);
+}
+
+.cards-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #121212, transparent);
+}
+
+.cards-wrapper.show-left::before {
+  opacity: 1;
+}
+.cards-wrapper.show-right::after {
+  opacity: 1;
+}
+
+.card {
+  max-width: 168px;
+  width: 24%;
+  min-width: 120px;
+  height: auto;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+  background-color: #1a1a1a;
+  box-sizing: border-box;
+  /* box-shadow: 0 0 white; */
+}
+
+.card:hover {
+  background-color: #2f2f2f;
+}
+
+.thumbnail {
+  position: relative;
+}
+
+.thumbnail img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.play-button-cards {
+  position: absolute;
+  display: flex;
+  width: 32%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  z-index: 200;
+  bottom: 10px;
+  right: 7%;
+  background-color: #1ed760;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.4s;
+  /* --background-base: #1ed760;
+  --background-highlight: #3be477;
+  --background-press: #1abc54;
+  --background-elevated-base: #3be477;
+  --background-elevated-highlight: #3be477;
+  --background-elevated-press: #1abc54;
+  --background-tinted-base: #1ed760;
+  --background-tinted-highlight: #1ed760;
+  --background-tinted-press: #1ed760;
+  --text-base: #000;
+  --text-subdued: #000;
+  --text-bright-accent: #000;
+  --text-negative: #000;
+  --text-warning: #000;
+  --text-positive: #000;
+  --text-announcement: #000;
+  --essential-base: #000;
+  --essential-subdued: #000;
+  --essential-bright-accent: #000;
+  --essential-negative: #000;
+  --essential-warning: #000;
+  --essential-positive: #000;
+  --essential-announcement: #000;
+  --decorative-base: #000;
+  --decorative-subdued: #1abc54; */
+}
+
+.play-button-cards:hover {
+  background-color: #53e085;
+  scale: 1.1;
+}
+
+.play-button-cards svg {
+  width: 45%;
+  aspect-ratio: 1/1;
+}
+
+.card:hover .play-button-cards {
+  opacity: 1;
+  bottom: 10%;
+}
+
+.info h3 {
+  font-size: 1em;
+  /* display: none; */
+  line-height: 20px;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info p {
+  font-size: 12px;
+  color: #aaa;
+  line-height: 15px;
+  margin: 2px 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

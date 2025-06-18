@@ -1,0 +1,127 @@
+.main {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  width: 99vw;
+  height: calc(100vh - 158px); /* subtract navbar height */
+  padding: 0 8px 8px 8px;
+  margin-top: 72px;
+  background-color: #000;
+  color: white;
+  overflow: hidden; /* Stop main container from scrolling */
+}
+
+.main > div {
+  border-radius: 10px;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-y: auto; /* ✅ scroll only inside sections */
+  -ms-overflow-style: none; /* IE/Edge scrollbar hidden */
+  scrollbar-width: auto; /* Firefox */
+  scrollbar-color: #1b1b1b #121212; /* Firefox thumb + track */
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.main > div::-webkit-scrollbar,
+.sidebar-main::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+.main > div:hover::-webkit-scrollbar,
+.sidebar-main:hover::-webkit-scrollbar {
+  background-color: #000;
+  opacity: 1;
+}
+
+.main > div::-webkit-scrollbar-thumb,
+.sidebar-main::-webkit-scrollbar-thumb {
+  background-color: #1a1a1a;
+  border-radius: 6px;
+}
+
+/* On hover – thumb becomes more visible */
+.main > div:hover::-webkit-scrollbar-thumb {
+  background-color: #111;
+}
+
+/* SIDEBAR LEFT - Shrinks FASTEST */
+#sidebar-left {
+  flex: 1 1 30vw;
+  background-color: #121212;
+  padding: 30px;
+  min-width: 280px;
+}
+
+/* MIDDLE SEC - Medium shrink */
+#middle-sec {
+  flex: 1.2 1 40vw;
+  background-color: #121212;
+  padding: 20px;
+  padding-right: 0;
+  /* box-shadow: inset 1px; */
+}
+
+/* SIDEBAR RIGHT - Shrinks SLOWEST */
+#sidebar-right {
+  flex: 1 1 30vw;
+  background-color: #121212;
+  padding: 20px;
+  min-width: 280px;
+  max-width: 702px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  /* display: none; */
+}
+
+/* Scrollbar hide (Spotify-ish touch) */
+#sidebar-left::-webkit-scrollbar,
+#sidebar-right::-webkit-scrollbar,
+#middle-sec::-webkit-scrollbar {
+  display: none;
+}
+
+.resizer {
+  width: 2px;
+  background-color: #2a2a2a;
+  cursor: col-resize;
+  z-index: 10;
+}
+
+.resizer:hover {
+  width: 5px;
+  background-color: #444;
+}
+
+@media (max-width: 500px) {
+  #sidebar-right {
+  }
+}
+@media (max-width: 600px) {
+  #middle-sec {
+    min-width: 0;
+  }
+}
+@media (max-width: 768px) {
+  #sidebar-right {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .main #sidebar-right {
+    min-width: 0;
+    max-width: 72px;
+  }
+}
+
+@media (max-width: 1007px) {
+  .main #sidebar-left {
+    min-width: 0;
+    max-width: 72px;
+  }
+}

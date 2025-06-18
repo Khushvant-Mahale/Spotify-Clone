@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shrink Together, Speed Varies</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #000;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .box {
+            padding: 20px;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            min-width: 0;
+            /* IMPORTANT for shrinking */
+        }
+
+        .box1 {
+            background-color: #1db954;
+            flex: 1 5 200px;
+            /* Fast shrink 🐇 */
+        }
+
+        .box2 {
+            background-color: #666;
+            flex: 1 2 200px;
+            /* Medium 🐈 */
+        }
+
+        .box3 {
+            background-color: #b91d1d;
+            flex: 1 0.5 200px;
+            /* Slow shrink 🐢 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box box1">Shrink: 5 🐇</div>
+        <div class="box box2">Shrink: 2 🐈</div>
+        <div class="box box3">Shrink: 0.5 🐢</div>
+    </div>
+</body>
+
+</html>

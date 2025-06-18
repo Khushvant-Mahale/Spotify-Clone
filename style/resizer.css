@@ -1,0 +1,82 @@
+/* Overlay mode */
+.overlay {
+  position: absolute;
+  top: 72px; /* match your navbar */
+  bottom: 0;
+  z-index: 99;
+  height: calc(100vh - 72px);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+#sidebar-left.overlay {
+  left: 0;
+  width: 280px;
+  transform: translateX(-100%);
+}
+
+#sidebar-right.overlay {
+  right: 0;
+  width: 280px;
+  transform: translateX(100%);
+}
+
+.overlay.active {
+  transform: translateX(0);
+}
+
+.open-left,
+.open-right {
+  display: none;
+  position: absolute;
+  top: 10px;
+  padding: 10px;
+  background: #1f1f1f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  z-index: 100;
+}
+
+.open-left {
+  left: 10px;
+}
+.open-right {
+  right: 10px;
+}
+
+/* Mobile only: collapse & enable overlay buttons */
+@media (max-width: 768px) {
+  /* #sidebar-left,
+  #sidebar-right {
+    display: none;
+  } */
+
+  /* #sidebar-left.overlay,
+  #sidebar-right.overlay {
+    display: block;
+  } */
+
+  /* .open-left,
+  .open-right {
+    display: block;
+  } */
+}
+
+@media (max-width: 800px) {
+  #sidebar-right.overlay {
+    display: block;
+  }
+  .open-right {
+    display: block;
+  }
+}
+
+@media (max-width: 1007px) {
+  #sidebar-left.overlay {
+    display: block;
+  }
+  .open-left {
+    display: block;
+  }
+}
