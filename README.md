@@ -1,67 +1,84 @@
-# 🎵 Spotify Clone - Web Music Player
+# 🎧 Spotify Clone – HTML | CSS | JavaScript
 
-![banner](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/banner.jpg)
-
-A **fully functional, slick AF Spotify web clone** made using plain JavaScript, HTML, and CSS.  
-Supports **dynamic playlists**, **live music preview**, **repeat modes**, **shuffle**, **volume control**, and more.  
-💥 No frameworks. No BS. Just pure DOM domination 🧠💻
+A **fully responsive, full-featured Spotify-inspired music player** 🔥  
+Built from scratch using **pure HTML, CSS & JavaScript** — no frameworks, no BS, just skill 💪  
+Loads songs dynamically from folders, extracts metadata, and plays like a real app 🎶
 
 ---
 
-## 🚀 Features
+## 🔥 Features
 
-| Feature                            | Status |
-| ---------------------------------- | ------ |
-| 🔥 Dynamic playlist & song loading | ✅     |
-| 🎧 Play/Pause per card and song    | ✅     |
-| 🔁 Repeat Modes (None, All, One)   | ✅     |
-| 🔀 Shuffle Mode                    | ✅     |
-| 🔊 Volume slider with mute toggle  | ✅     |
-| 🎚️ Audio feedback with synced UI   | ✅     |
-| 🎨 Slick CSS transitions & visuals | ✅     |
-| 📦 Organized file/folder structure | ✅     |
-| 🧠 Fully JS-powered Audio API      | ✅     |
+- 🎨 **Custom Spotify-Style UI**
+- 📁 **Dynamic Playlist Loading from Folder Structure**
+- 🧠 **Metadata Extraction** (Album, Artist, Title via `jsmediatags`)
+- 🎧 **Audio Controls** (Play, Pause, Next, Previous)
+- 🔁 **Repeat Modes**: No Repeat / Repeat All / Repeat One
+- 🔀 **Shuffle Mode** (Random song playback)
+- 🔊 **Volume Control** with smooth gradient slider
+- 🖼️ **Album Art Auto Load**
+- 🧠 **Smart Play Logic** (No reloading same song, toggle handling)
+- 📱 **Fully Responsive Design**
+- ⚡ **Zero Frameworks** (Vanilla JavaScript mastery)
 
 ---
 
 ## 📸 Screenshots
 
-> _Spoiler: Looks sexier live._
-
-![player-preview](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/preview1.jpg)
-![cards](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/preview2.jpg)
-
----
-
-## 🧠 Tech Stack
-
-- 🟩 **Vanilla JavaScript**
-- 🟨 **HTML5**
-- 🎨 **CSS3**
-- 🎧 **HTML Audio API**
-- 📁 Dynamic `fetch()` + `info.json` loaders
+| 🎵 Home UI                    | 📂 Playlist View                      | 📱 Mobile Responsive              |
+| ----------------------------- | ------------------------------------- | --------------------------------- |
+| ![Home](screenshots/home.png) | ![Playlist](screenshots/playlist.png) | ![Mobile](screenshots/mobile.png) |
 
 ---
 
-## 🛠 How It Works
+## ⚙️ Tech Stack
 
-- 📂 Music folders inside `/libraries/` are auto-scanned
-- 🎶 Playlists and songs are fetched dynamically
-- ⏯️ Every card and list item is playable
-- 🔁 Repeat & 🔀 shuffle modes handled via custom logic
-- 🔊 Volume control has dynamic slider + mute handling
-- UI updates stay in sync with playback status, current song, and player bar
+| Tech                     | Purpose                   |
+| ------------------------ | ------------------------- |
+| **HTML5**                | App structure & layout    |
+| **CSS3**                 | Custom UI + animations    |
+| **JavaScript (Vanilla)** | Logic, audio, DOM control |
+| **jsmediatags**          | Extract MP3 metadata      |
 
 ---
 
-## 🧪 Try It Live
+## 🧠 How It Works
 
-> 🔗 Coming soon: Deploying to Netlify/GitHub Pages  
-> Until then, clone it locally:
+1. Scans folders inside `/libraries/` to dynamically build playlists
+2. Parses each folder’s `info.json` for title, description & thumbnail
+3. Fetches `.mp3` files and reads their metadata using `jsmediatags`
+4. Displays songs in custom UI and plays them using HTML5 Audio
+5. Supports:
+   - 🔁 Repeat One / All / None
+   - 🔀 Shuffle mode
+   - 🔊 Volume slider + mute
+   - 🧠 Smart play state handling
+
+---
+
+## 🕹️ Controls
+
+| Control | Behavior                        |
+| ------- | ------------------------------- |
+| ▶️ / ⏸️ | Play/Pause                      |
+| ⏮️ / ⏭️ | Prev / Next Song                |
+| 🔁      | Repeat Modes (None → All → One) |
+| 🔀      | Shuffle Mode Toggle             |
+| 🔊      | Volume & Mute                   |
+| 📁      | Dynamic Playlist Loader         |
+
+---
+
+## 🚀 Demo Preview
+
+📽️ _[Preview Video](screenshots/preview.mkv)_  
+(_host it on GitHub or convert to GIF for live demo in future_)
+
+---
+
+## 🧪 Try It Locally
 
 ```bash
 git clone https://github.com/Khushvant-Mahale/Spotify-Clone.git
 cd Spotify-Clone
-npx live-server
-# or use VS Code Live Server extension
+# Open index.html using Live Server or localhost
 ```
