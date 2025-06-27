@@ -1,84 +1,67 @@
-# 🎧 Spotify Clone – HTML | CSS | JavaScript
+# 🎵 Spotify Clone - Web Music Player
 
-A **fully responsive, full-featured Spotify-inspired music player** 🔥  
-Built from scratch using **pure HTML, CSS & JavaScript** — no frameworks, no BS, just skill 💪  
-Loads songs dynamically from folders, extracts metadata, and plays like a real app 🎶
+![banner](assets/mobile.png)
+
+A **fully functional, slick AF Spotify web clone** made using plain JavaScript, HTML, and CSS.  
+Supports **dynamic playlists**, **live music preview**, **repeat modes**, **shuffle**, **volume control**, and more.  
+💥 No frameworks. No BS. Just pure DOM domination 🧠💻
 
 ---
 
-## 🔥 Features
+## 🚀 Features
 
-- 🎨 **Custom Spotify-Style UI**
-- 📁 **Dynamic Playlist Loading from Folder Structure**
-- 🧠 **Metadata Extraction** (Album, Artist, Title via `jsmediatags`)
-- 🎧 **Audio Controls** (Play, Pause, Next, Previous)
-- 🔁 **Repeat Modes**: No Repeat / Repeat All / Repeat One
-- 🔀 **Shuffle Mode** (Random song playback)
-- 🔊 **Volume Control** with smooth gradient slider
-- 🖼️ **Album Art Auto Load**
-- 🧠 **Smart Play Logic** (No reloading same song, toggle handling)
-- 📱 **Fully Responsive Design**
-- ⚡ **Zero Frameworks** (Vanilla JavaScript mastery)
+| Feature                            | Status |
+| ---------------------------------- | ------ |
+| 🔥 Dynamic playlist & song loading | ✅     |
+| 🎧 Play/Pause per card and song    | ✅     |
+| 🔁 Repeat Modes (None, All, One)   | ✅     |
+| 🔀 Shuffle Mode                    | ✅     |
+| 🔊 Volume slider with mute toggle  | ✅     |
+| 🎚️ Audio feedback with synced UI   | ✅     |
+| 🎨 Slick CSS transitions & visuals | ✅     |
+| 📦 Organized file/folder structure | ✅     |
+| 🧠 Fully JS-powered Audio API      | ✅     |
 
 ---
 
 ## 📸 Screenshots
 
-| 🎵 Home UI                    | 📂 Playlist View                      | 📱 Mobile Responsive              |
-| ----------------------------- | ------------------------------------- | --------------------------------- |
-| ![Home](screenshots/home.png) | ![Playlist](screenshots/playlist.png) | ![Mobile](screenshots/mobile.png) |
+> _Spoiler: Looks sexier live._
+
+![playlist](assets/playlist.png)
+![cards](assets/home.png)
 
 ---
 
-## ⚙️ Tech Stack
+## 🧠 Tech Stack
 
-| Tech                     | Purpose                   |
-| ------------------------ | ------------------------- |
-| **HTML5**                | App structure & layout    |
-| **CSS3**                 | Custom UI + animations    |
-| **JavaScript (Vanilla)** | Logic, audio, DOM control |
-| **jsmediatags**          | Extract MP3 metadata      |
-
----
-
-## 🧠 How It Works
-
-1. Scans folders inside `/libraries/` to dynamically build playlists
-2. Parses each folder’s `info.json` for title, description & thumbnail
-3. Fetches `.mp3` files and reads their metadata using `jsmediatags`
-4. Displays songs in custom UI and plays them using HTML5 Audio
-5. Supports:
-   - 🔁 Repeat One / All / None
-   - 🔀 Shuffle mode
-   - 🔊 Volume slider + mute
-   - 🧠 Smart play state handling
+- 🟩 **Vanilla JavaScript**
+- 🟨 **HTML5**
+- 🎨 **CSS3**
+- 🎧 **HTML Audio API**
+- 📁 Dynamic `fetch()` + `info.json` loaders
 
 ---
 
-## 🕹️ Controls
+## 🛠 How It Works
 
-| Control | Behavior                        |
-| ------- | ------------------------------- |
-| ▶️ / ⏸️ | Play/Pause                      |
-| ⏮️ / ⏭️ | Prev / Next Song                |
-| 🔁      | Repeat Modes (None → All → One) |
-| 🔀      | Shuffle Mode Toggle             |
-| 🔊      | Volume & Mute                   |
-| 📁      | Dynamic Playlist Loader         |
+- 📂 Music folders inside `/libraries/` are auto-scanned
+- 🎶 Playlists and songs are fetched dynamically
+- ⏯️ Every card and list item is playable
+- 🔁 Repeat & 🔀 shuffle modes handled via custom logic
+- 🔊 Volume control has dynamic slider + mute handling
+- UI updates stay in sync with playback status, current song, and player bar
 
 ---
 
-## 🚀 Demo Preview
+## 🧪 Try It Live
 
-📽️ _[Preview Video](screenshots/preview.mkv)_  
-(_host it on GitHub or convert to GIF for live demo in future_)
-
----
-
-## 🧪 Try It Locally
+> 🔗 Coming soon: Deploying to Netlify/GitHub Pages  
+> Until then, clone it locally:
 
 ```bash
 git clone https://github.com/Khushvant-Mahale/Spotify-Clone.git
 cd Spotify-Clone
-# Open index.html using Live Server or localhost
+npx live-server
+# or use VS Code Live Server extension
 ```
