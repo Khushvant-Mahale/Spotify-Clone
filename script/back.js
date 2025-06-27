@@ -116,48 +116,22 @@ audio.addEventListener("ended", () => {
 });
 
 // 🧠 Load all categories & playlists dynamically
+const API_BASE = "https://spotify-backend-j16b.onrender.com";
+
 async function loadAllPlaylists() {
   document.getElementById("middle-clr").innerHTML = "";
-
   const wrapper = document.querySelector("#middle-sec");
 
   try {
-    const categoriesRes = await fetch("libraries/");
-    const categoriesText = await categoriesRes.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(categoriesText, "text/html");
+    const res = await fetch(`${API_BASE}/api/playlists`);
+    const data = await res.json();
 
-    const folderLinks = [...doc.querySelectorAll("a.icon-directory")];
-    const folders = folderLinks
-      .map((a) => {
-        const href = a.getAttribute("href");
-        const match = href.match(/\/libraries\/(.*?)(\/)?$/);
-        return match ? match[1] : null;
-      })
-      .filter(Boolean);
-
-    console.log("📁 Category folders:", folders);
-
-    for (let folder of folders) {
-      const categoryPath = `libraries/${folder}`;
-      const infoPath = `${categoryPath}/info.json`;
-      console.log("🧐 Fetching category info:", infoPath);
-
-      const res = await fetch(infoPath);
-      if (!res.ok) {
-        const html = await res.text();
-        console.warn("❌ Failed to load:", infoPath, "\n", html);
-        continue;
-      }
-
-      const info = await res.json();
-
-      // 🧱 Safe DOM build (no innerHTML)
+    for (const category of data) {
       const section = document.createElement("div");
       section.className = "spotify-playlist";
 
       const h2 = document.createElement("h2");
-      h2.textContent = info.title;
+      h2.textContent = category.title;
 
       const wrapperDiv = document.createElement("div");
       wrapperDiv.className = "cards-wrapper";
@@ -165,128 +139,102 @@ async function loadAllPlaylists() {
       const cardsContainer = document.createElement("div");
       cardsContainer.className = "cards";
 
+      for (const playlist of category.playlists) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.folder = `${category.category}/${playlist.folder}`;
+        card.dataset.songs = JSON.stringify(playlist.songs);
+
+        // 🔪 Clean the broken image string if needed
+        const rawImg = playlist.img || "";
+        const cleanImg = rawImg.includes("http")
+          ? rawImg.slice(rawImg.indexOf("http")) // 🔥 CUT OUT folder garbage
+          : `${API_BASE}${rawImg}`;
+
+        card.dataset.cover = cleanImg;
+
+        const thumb = document.createElement("div");
+        thumb.className = "thumbnail";
+
+        const img = document.createElement("img");
+        img.src = cleanImg;
+        img.alt = playlist.title;
+
+        // 💥 Optional fallback in case URL is dead
+        img.onerror = () => {
+          img.src = "fallback.jpg"; // use your own default cover
+        };
+
+        const btn = document.createElement("button");
+        btn.className = "play-button-cards";
+        btn.setAttribute("aria-label", `Play ${playlist.title}`);
+        btn.innerHTML = playIconSVG();
+
+        thumb.appendChild(img);
+        thumb.appendChild(btn);
+
+        const infoDiv = document.createElement("div");
+        infoDiv.className = "info";
+        infoDiv.innerHTML = `<h3 class="title">${playlist.title}</h3><p class="discription">${playlist.description}</p>`;
+
+        card.appendChild(thumb);
+        card.appendChild(infoDiv);
+        cardsContainer.appendChild(card);
+      }
+
       wrapperDiv.appendChild(cardsContainer);
       section.appendChild(h2);
       section.appendChild(wrapperDiv);
-
-      const catRes = await fetch(categoryPath);
-      const catText = await catRes.text();
-      const catDoc = parser.parseFromString(catText, "text/html");
-
-      const subfolders = [...catDoc.querySelectorAll("a.icon-directory")]
-        .map((a) => {
-          const href = a.getAttribute("href");
-          const match = href.match(
-            new RegExp(`/libraries/${folder}/(.*?)(/)?$`)
-          );
-          return match ? match[1] : null;
-        })
-        .filter(Boolean);
-
-      console.log(`📦 ${info.title} playlists:`, subfolders);
-
-      if (subfolders.length === 0) {
-        console.warn(`⚠️ No playlists found in category '${info.title}'`);
-      }
-
-      for (let sub of subfolders) {
-        const playlistPath = `libraries/${folder}/${sub}`;
-        const metaPath = `${playlistPath}/info.json`;
-        console.log("🎵 Fetching playlist info:", metaPath);
-
-        try {
-          const meta = await fetch(metaPath).then((res) => res.json());
-
-          const card = document.createElement("div");
-          card.className = "card";
-          card.dataset.folder = `${folder}/${sub}`;
-
-          const thumb = document.createElement("div");
-          thumb.className = "thumbnail";
-
-          const img = document.createElement("img");
-          img.src = meta.img;
-          img.alt = meta.title;
-
-          const btn = document.createElement("button");
-          btn.className = "play-button-cards";
-          btn.setAttribute("aria-label", `Play ${meta.title}`);
-          btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M7.05 3.606L20.54 11.394a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606Z"/></svg>`;
-
-          thumb.appendChild(img);
-          thumb.appendChild(btn);
-
-          const infoDiv = document.createElement("div");
-          infoDiv.className = "info";
-          infoDiv.innerHTML = `<h3 class="title">${meta.title}</h3><p class="discription">${meta.description}</p>`;
-
-          card.appendChild(thumb);
-          card.appendChild(infoDiv);
-
-          cardsContainer.appendChild(card);
-        } catch (err) {
-          console.error("❌ Error fetching playlist info:", metaPath, err);
-        }
-      }
-
       wrapper.appendChild(section);
     }
-  } catch (err) {
-    console.error("💥 loadAllPlaylists failed:", err);
-  }
 
-  document.dispatchEvent(new Event("DOMContentLoaded"));
-  setupCardShadows();
+    document.dispatchEvent(new Event("DOMContentLoaded"));
+    setupCardShadows();
+  } catch (err) {
+    console.error("💥 Failed to load playlists from backend:", err);
+  }
 }
 
 // 🧠 Fetch songs inside playlist
-async function getSongs(folder = "songs", img) {
-  try {
-    const a = await fetch(`${folder}`);
-    const response = await a.text();
-    const div = document.createElement("div");
-    div.innerHTML = response;
-
-    const songs = [...div.getElementsByTagName("a")]
-      .map((a) => a.href)
-      .filter((href) => href.endsWith(".mp3"));
-
-    console.log(`🎧 Loaded ${songs.length} songs from`, folder);
-
-    let ul = document.querySelector(".library-items");
-    ul.innerHTML = "";
-
-    songs.forEach((songUrl) => {
-      let songName = decodeURIComponent(
-        songUrl.split("/").pop().replace(".mp3", "")
-      );
-      let li = document.createElement("li");
-      li.className = "library-item";
-      li.setAttribute("data-src", songUrl);
-      li.innerHTML = `
-        <div style="position: relative; display: flex;">
-          <img src="${img}" alt="${songName}" />
-          <button class="play-button">
-            <span aria-hidden="true" class="icon-wrapper">
-              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" class="play-icon">
-                <path d="M7.05 3.606L20.54 11.394a0.7 0.7 0 0 1 0 1.212L7.05 20.394A0.7 0.7 0 0 1 6 19.788V4.212a0.7 0.7 0 0 1 1.05-0.606" />
-              </svg>
-            </span>
-          </button>
-        </div>
-        <div class="item-info">
-          <p class="title">${songName}</p>
-          <p class="subtitle">MP3 File</p>
-        </div>
-      `;
-      ul.appendChild(li);
-    });
-
-    currentSongs = songs;
-    currentSongIndex = -1;
-  } catch (err) {
-    console.error("❌ getSongs failed:", folder, err);
+async function getSongs(folder = "", img = "") {
+  const card = [...document.querySelectorAll(".card")].find(
+    (c) => c.dataset.folder === folder
+  );
+  if (!card) {
+    console.warn("🛑 Card not found for folder:", folder);
+    return;
   }
+
+  const songs = JSON.parse(card.dataset.songs || "[]").map(
+    (url) => `${API_BASE}${url}`
+  );
+
+  currentSongs = songs;
+  currentSongIndex = -1;
+
+  const ul = document.querySelector(".library-items");
+  ul.innerHTML = "";
+
+  songs.forEach((songUrl) => {
+    const songName = decodeURIComponent(
+      songUrl.split("/").pop().replace(".mp3", "")
+    );
+    const li = document.createElement("li");
+    li.className = "library-item";
+    li.setAttribute("data-src", songUrl);
+    li.innerHTML = `
+      <div style="position: relative; display: flex;">
+        <img src="${img}" alt="${songName}" />
+        <button class="play-button">
+          <span aria-hidden="true" class="icon-wrapper">${playIconSVG()}</span>
+        </button>
+      </div>
+      <div class="item-info">
+        <p class="title">${songName}</p>
+        <p class="subtitle">MP3 File</p>
+      </div>`;
+    ul.appendChild(li);
+  });
 }
 
 function playSongAt(index) {
@@ -351,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const folder = item.currentTarget.dataset.folder;
       const imgSrc = item.currentTarget.querySelector("img")?.src || "";
       console.log("🎯 Card clicked. Folder:", folder);
-      await getSongs(`libraries/${folder}`, imgSrc);
+      await getSongs(folder, imgSrc);
     });
   });
 });
@@ -548,7 +496,7 @@ document.addEventListener("click", async (e) => {
 </svg>
 `;
 
-  await getSongs(`libraries/${folder}`, imgSrc);
+  await getSongs(folder, imgSrc);
   playSongAt(0);
   currentFolder = folder;
 });
