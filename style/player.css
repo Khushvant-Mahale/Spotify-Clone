@@ -1,11 +1,7 @@
 .player {
   height: 72px;
-  background-color: #121212;
   border-radius: 10px;
-  margin: 0 8px;
-}
-
-.player {
+  margin: 0;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -17,6 +13,7 @@
   /* max-width: 600px; */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   /* flex: 1; */
+  padding-bottom: 20px;
 }
 
 .cover-art img {
@@ -64,6 +61,7 @@
 }
 
 .controls {
+  /* position: relative; */
   display: flex;
   gap: 8px;
 }
@@ -76,11 +74,29 @@
   cursor: pointer;
   transition: transform 0.2s;
   padding: 5px 15px;
+  max-width: 48px;
+  aspect-ratio: 1/1;
 }
 
-.controls button:hover {
+.controls button:hover svg {
   transform: scale(1.1);
-  color: #1db954;
+  fill: #1db954;
+}
+
+.controls .play svg {
+  fill: rgb(255, 255, 255);
+}
+
+.controls .play:hover svg {
+  transform: scale(1.2);
+}
+
+.controls .shuffle:hover svg {
+  fill: white !important;
+}
+
+.controls .repeat:hover svg {
+  fill: white;
 }
 
 .seekbar-container {
@@ -155,5 +171,86 @@
 @media (max-width: 768px) {
   .track-info {
     display: none;
+  }
+}
+
+.volume-control {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  left: 0;
+  bottom: 22px;
+}
+
+.volume-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease;
+  padding: 5px 0 !important;
+}
+
+.volume-btn:hover {
+  transform: scale(1.2);
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 4px;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  width: 12px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+  /* margin-top: -5px; */
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+}
+
+.volume-slider::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  background: white;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-track {
+  background: transparent;
+}
+
+@container player (max-width: 555px) {
+  .volume-slider {
+    width: 0;
+  }
+  .volume-slider::-webkit-slider-thumb {
+    display: none;
+  }
+  .volume-control {
+    background-color: #181818;
+  }
+  .volume-control:hover .volume-slider {
+    width: 100px !important;
+  }
+  .volume-control:hover .volume-slider::-webkit-slider-thumb {
+    display: block;
   }
 }

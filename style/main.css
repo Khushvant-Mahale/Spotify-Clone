@@ -5,7 +5,7 @@
   width: 99vw;
   height: calc(100vh - 158px); /* subtract navbar height */
   padding: 0 8px 8px 8px;
-  margin-top: 72px;
+  /* margin-top: 72px; */
   background-color: #000;
   color: white;
   overflow: hidden; /* Stop main container from scrolling */
@@ -52,6 +52,7 @@
   background-color: #121212;
   padding: 30px;
   min-width: 280px;
+  transition: all 0.3s;
 }
 
 /* MIDDLE SEC - Medium shrink */
@@ -64,18 +65,27 @@
 }
 
 /* SIDEBAR RIGHT - Shrinks SLOWEST */
-#sidebar-right {
+.right-panel {
   flex: 1 1 30vw;
   background-color: #121212;
   padding: 20px;
   min-width: 280px;
-  max-width: 702px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   gap: 10px;
   /* display: none; */
+  position: relative;
+}
+
+.hide-now-playing-btn {
+  display: none;
+}
+
+#sidebar-right:hover .hide-now-playing-btn {
+  display: flex;
 }
 
 /* Scrollbar hide (Spotify-ish touch) */
@@ -83,6 +93,44 @@
 #sidebar-right::-webkit-scrollbar,
 #middle-sec::-webkit-scrollbar {
   display: none;
+}
+
+/* CRACK-STRONG version */
+.resizable-panel.right-panel.hidden {
+  overflow: visible;
+  max-width: 0;
+  padding: 0;
+}
+
+.resizable-panel.right-panel.hidden .hide-now-playing-btn {
+  left: -50px !important;
+  display: flex !important;
+  background-color: #1a1a1a !important;
+  width: 100px !important;
+  height: 36px;
+  justify-content: start !important;
+  padding: 0 10px !important;
+}
+
+.resizable-panel.right-panel.hidden .hide-now-playing-btn span {
+  height: 26px;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  height: 26px !important;
+  width: 26px !important;
+}
+
+.resizable-panel.right-panel.hidden .hide-now-playing-btn span:nth-of-type(1) {
+  display: none !important;
+}
+
+.resizable-panel.right-panel.hidden .hide-now-playing-btn span:nth-of-type(2) {
+  display: flex !important;
+}
+
+.resizable-panel.right-panel.hidden .hide-now-playing-btn span svg {
+  width: 72% !important;
 }
 
 .resizer {
@@ -97,8 +145,13 @@
   background-color: #444;
 }
 
-@media (max-width: 500px) {
-  #sidebar-right {
+.main .fade {
+  display: none;
+}
+
+@media (max-width: 430px) {
+  .main {
+    height: calc(85vh - 72px);
   }
 }
 @media (max-width: 600px) {
@@ -110,18 +163,53 @@
   #sidebar-right {
     display: none;
   }
+  .left-panel#sidebar-left {
+    position: absolute !important;
+    margin-left: 4px;
+    bottom: 8px;
+    min-width: 274px;
+    width: 60vw !important;
+    z-index: 1000;
+  }
+  #middle-sec {
+    margin-left: 82px;
+  }
+  .resizer {
+    display: none;
+  }
+
+  .main .fade {
+    position: absolute;
+    left: 60vw;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 500;
+    background-color: #00000071;
+    display: block;
+  }
+
+  .min-left-side#sidebar-left ~ .fade {
+    display: none;
+  }
 }
 
 @media (max-width: 800px) {
   .main #sidebar-right {
-    min-width: 0;
-    max-width: 72px;
+    overflow: visible;
+    max-width: 0;
+    padding: 0;
   }
 }
 
 @media (max-width: 1007px) {
   .main #sidebar-left {
-    min-width: 0;
-    max-width: 72px;
+    /* min-width: 0; */
+    /* width: 72px; */
   }
+}
+
+.main .min-left-side#sidebar-left {
+  min-width: 0;
+  max-width: 72px;
 }

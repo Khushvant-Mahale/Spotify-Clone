@@ -5,10 +5,11 @@
 
 body {
   display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   background-color: #000000;
-
+  justify-content: start;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-style: normal;
@@ -23,6 +24,9 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden; /* 💥 disables page scroll */
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 button {
@@ -35,7 +39,6 @@ button {
   cursor: pointer;
 }
 
-span:hover,
 button:hover {
   background-color: #2a2a2a;
 }

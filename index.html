@@ -12,7 +12,6 @@
         rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.5/dist/jsmediatags.min.js"></script>
-    <script src="script/back.js"></script>
 
 
     <link rel="stylesheet" href="style/head.css">
@@ -151,39 +150,69 @@
                     </svg></button>
             </div>
             <button class="user"><span
-                    style="background-color: rgb(255, 100, 55); color: rgb(0, 0, 0); line-height: 32px; width: 32px;">K</span></button>
+                    style="background-color: rgb(255, 100, 55); color: rgb(0, 0, 0); line-height: 32px; width: 32px; display: flex; justify-content: center; align-items: center;"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        class="injected-svg" data-src="https://cdn.hugeicons.com/icons/user-duotone-rounded.svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                        <path opacity="0.4"
+                            d="M12 3.5C14.7614 3.5 17 5.73858 17 8.5C17 11.2614 14.7614 13.5 12 13.5C15.866 13.5 19 16.634 19 20.5H5C5 16.634 8.13401 13.5 12 13.5C9.23858 13.5 7 11.2614 7 8.5C7 5.73858 9.23858 3.5 12 3.5Z"
+                            fill="#000000"></path>
+                        <path
+                            d="M17 8.5C17 5.73858 14.7614 3.5 12 3.5C9.23858 3.5 7 5.73858 7 8.5C7 11.2614 9.23858 13.5 12 13.5C14.7614 13.5 17 11.2614 17 8.5Z"
+                            stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M19 20.5C19 16.634 15.866 13.5 12 13.5C8.13401 13.5 5 16.634 5 20.5" stroke="#000000"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></span></button>
 
         </div>
     </div>
     <div>
         <div class="main">
-
             <div id="sidebar-left" class="resizable-panel left-panel">
                 <div class="sidebar-container">
 
                     <div class="top">
 
                         <header class="sidebar-header">
-                            <button type="button" aria-label="Open Your Library" class="library-btn">
-                                <span class="icon-wrapper">
-                                    <!-- Library Icon -->
-                                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="white" id="l-icon">
-                                        <path
-                                            d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866M16 4.732V20h4V7.041zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1m6 0a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1" />
-                                    </svg>
-                                </span>
-                                <span class="icon-wrapper">
-                                    <!-- Sidebar Expand Icon -->
-                                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="white" id="l-exp">
-                                        <path
-                                            d="M14.457 15.207a1 1 0 0 1-1.414-1.414L14.836 12l-1.793-1.793a1 1 0 0 1 1.414-1.414l2.5 2.5a1 1 0 0 1 0 1.414z" />
-                                        <path
-                                            d="M20 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM4 20V4h4v16zm16 0H10V4h10z" />
-                                    </svg>
-                                </span>
-                            </button>
+                            <div style="display: flex;">
 
-                            <div class="top-title">Your Library</div>
+
+                                <button type="button" aria-label="Open Your Library" class="library-btn">
+                                    <span class="icon-wrapper">
+                                        <!-- Library Icon -->
+                                        <svg viewBox="0 0 24 24" aria-hidden="true" fill="white" id="l-icon">
+                                            <path
+                                                d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866M16 4.732V20h4V7.041zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1m6 0a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1" />
+                                        </svg>
+                                    </span>
+                                    <span class="icon-wrapper">
+                                        <!-- Sidebar Expand Icon -->
+                                        <svg viewBox="0 0 24 24" aria-hidden="true" fill="white" id="l-exp">
+                                            <path
+                                                d="M14.457 15.207a1 1 0 0 1-1.414-1.414L14.836 12l-1.793-1.793a1 1 0 0 1 1.414-1.414l2.5 2.5a1 1 0 0 1 0 1.414z" />
+                                            <path
+                                                d="M20 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zM4 20V4h4v16zm16 0H10V4h10z" />
+                                        </svg>
+                                    </span>
+
+                                </button>
+                                <button type="button" class="collapse-library-btn library-btn"
+                                    aria-label="Collapse Your Library">
+                                    <span class="icon-wrapper" aria-hidden="true">
+                                        <svg viewBox="0 0 16 16" role="img" class="icon" fill="white">
+                                            <path
+                                                d="M10.97 5.47a.75.75 0 1 1 1.06 1.06L10.56 8l1.47 1.47a.75.75 0 1 1-1.06 1.06l-2-2a.75.75 0 0 1 0-1.06z" />
+                                            <path
+                                                d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm.5 1.5H5v13H1.5zm13 13h-8v-13h8z" />
+                                        </svg>
+                                    </span>
+                                </button>
+
+
+                                <div class="top-title">
+                                    Your Library
+                                </div>
+                            </div>
                             <div class="library-actions">
                                 <button title="Add New">➕<span> Create</span></button>
                                 <button class="resize" title="Fullscreen">⛶</button>
@@ -279,16 +308,17 @@
 
             <div id="resizer-left" class="resizer"></div>
 
-
+            <div class="fade"></div>
             <div id="middle-sec">
-                <button class="open-right">☰ Queue</button>
-                <div>
+
+
+                <div id="middle-clr">
 
                     <div class="spotify-playlist">
                         <h2>Playlists Category 1</h2>
                         <div class="cards-wrapper">
                             <div class="cards">
-                                <!-- Example Card -->
+
                                 <div class="card" id="card-1.1" data-folder="Wednesday">
                                     <div class="thumbnail"><img
                                             src="https://i.scdn.co/image/ab67706f0000000232798af1bc0064a0a8ea83c0"
@@ -366,7 +396,7 @@
                         <h2>Playlists Category 2</h2>
                         <div class="cards-wrapper">
                             <div class="cards">
-                                <!-- Example Card -->
+
                                 <div class="card" id="card-2.1">
                                     <div class="thumbnail"><img
                                             src="	https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da843ebc20a9c28c7c6040b5ffae"
@@ -411,6 +441,28 @@
             <div id="resizer-right" class="resizer"></div>
 
             <div id="sidebar-right" class="resizable-panel right-panel">
+
+                <button class="hide-now-playing-btn" aria-label="Hide Now Playing view"
+                    style="width: 36px; z-index: 400; aspect-ratio: 1/1; padding: 0; justify-content: center; align-items: center; position: absolute; top: 10px; left: 10px;">
+                    <span class=" icon-wrapper" aria-hidden="true">
+                        <svg viewBox="0 0 16 16" role="img" aria-hidden="true" class="icon" fill="white"
+                            style="width: 16px;">
+                            <path
+                                d="M10.03 10.53a.75.75 0 1 1-1.06-1.06L10.44 8 8.97 6.53a.75.75 0 0 1 1.06-1.06l2 2a.75.75 0 0 1 0 1.06z" />
+                            <path
+                                d="M15 16a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1zm-8.5-1.5v-13h8v13zm-1.5 0H1.5v-13H5z" />
+                        </svg>
+                    </span>
+                    <span class="icon-wrapper" aria-hidden="true" style="display: none;">
+                        <svg viewBox="0 0 16 16" role="img" class="icon" fill="white">
+                            <path
+                                d="M10.97 5.47a.75.75 0 1 1 1.06 1.06L10.56 8l1.47 1.47a.75.75 0 1 1-1.06 1.06l-2-2a.75.75 0 0 1 0-1.06z" />
+                            <path
+                                d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm.5 1.5H5v13H1.5zm13 13h-8v-13h8z" />
+                        </svg>
+                    </span>
+                </button>
+
                 <div
                     style="display: flex; width: 90%; aspect-ratio: 1/1; background-color: #2f2f2f; border-radius: 10px;">
                 </div>
@@ -451,16 +503,57 @@
                 </div>
             </div>
             <div style="
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-">
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    flex: 1;
+                    position: relative;
+                    container-type: inline-size;
+                    container-name: player;
+                ">
                 <div class="controls">
-                    <button class="prev">⏮</button>
-                    <button class="play">▶️</button>
-                    <button class="next">⏭</button>
+                    <button class="shuffle" data-enabled="false" aria-label="Shuffle Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="#535353" role="img">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M2 6C2 5.44772 2.44772 5 3 5H6.9166C7.93041 5 8.87563 5.51203 9.42944 6.3612L15.7458 16.0463C15.9304 16.3293 16.2455 16.5 16.5834 16.5H21C21.3844 16.5 21.7348 16.7203 21.9013 17.0668C22.0678 17.4133 22.021 17.8245 21.7809 18.1247L19.7809 20.6247C19.4359 21.056 18.8066 21.1259 18.3753 20.7809C17.944 20.4359 17.8741 19.8066 18.2191 19.3753L18.9194 18.5H16.5834C15.5696 18.5 14.6244 17.988 14.0706 17.1388L7.75421 7.45373C7.56961 7.17068 7.25454 7 6.9166 7H3C2.44772 7 2 6.55228 2 6Z" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M2 18C2 18.5523 2.44772 19 3 19H6.92963C7.93269 19 8.86939 18.4987 9.42578 17.6641L10.8321 15.5547C11.1384 15.0952 11.0142 14.4743 10.5547 14.1679C10.0952 13.8616 9.4743 13.9858 9.16795 14.4453L7.76168 16.5547C7.57622 16.8329 7.26399 17 6.92963 17H3C2.44772 17 2 17.4477 2 18ZM13.4855 9.85749C13.9591 10.1416 14.5733 9.98808 14.8575 9.5145L15.7749 7.98551C15.9556 7.6843 16.2811 7.5 16.6324 7.5H21C21.3844 7.5 21.7348 7.27965 21.9013 6.93319C22.0678 6.58672 22.021 6.17548 21.7809 5.87531L19.7809 3.37531C19.4359 2.94404 18.8066 2.87412 18.3753 3.21913C17.944 3.56414 17.8741 4.19343 18.2191 4.62469L18.9194 5.5H16.6324C15.5786 5.5 14.6021 6.0529 14.0599 6.95651L13.1425 8.4855C12.8584 8.95908 13.0119 9.57334 13.4855 9.85749Z" />
+                        </svg>
+                    </button>
+                    <button class="prev"><svg viewBox="0 0 16 16" role="img" aria-hidden="true" class="icon-previous"
+                            fill="white" width="24" height="24">
+                            <path
+                                d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7z" />
+                        </svg>
+                    </button>
+                    <button class="play"><svg viewBox="0 0 16 16" role="img" aria-hidden="true" class="icon-play"
+                            fill="white" width="24" height="24">
+                            <path
+                                d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z" />
+                        </svg>
+                    </button>
+                    <button class="next"><svg viewBox="0 0 16 16" role="img" aria-hidden="true" class="icon-next"
+                            fill="white" width="24" height="24">
+                            <path
+                                d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7z" />
+                        </svg>
+
+
+                    </button>
+                    <button class="repeat" data-mode="none" aria-label="Repeat Mode">
+                        <svg viewBox="0 0 16 16" aria-hidden="true" role="img" class="icon">
+                            <path
+                                d="M0 4.75A3.75 3.75 0 0 1 3.75 1h8.5A3.75 3.75 0 0 1 16 4.75v5a3.75 3.75 0 0 1-3.75 3.75H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a2.25 2.25 0 0 0 2.25-2.25v-5a2.25 2.25 0 0 0-2.25-2.25h-8.5A2.25 2.25 0 0 0 1.5 4.75v5A2.25 2.25 0 0 0 3.75 12H5v1.5H3.75A3.75 3.75 0 0 1 0 9.75z" />
+                        </svg>
+                    </button>
+
+                    <div class="volume-control">
+                        <button class="volume-btn" aria-label="Toggle Mute">🔊</button>
+                        <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                    </div>
+
                 </div>
                 <div class="seekbar-container">
                     <span class="current-time">0:00</span>
@@ -485,7 +578,7 @@
     </div>
 
 
-
+    <script src="script/back.js"></script>
     <script src="script/ui.js"></script>
 
 </body>

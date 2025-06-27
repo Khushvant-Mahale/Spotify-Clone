@@ -10,6 +10,7 @@
   flex-direction: column;
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
+  transition: all 0.4s;
 }
 
 .sidebar-container {
@@ -61,6 +62,10 @@
   height: 44px;
   background: none;
   display: none;
+}
+
+.collapse-library-btn svg {
+  width: 18px !important;
 }
 
 .icon-wrapper svg {
@@ -149,7 +154,7 @@
   background-color: #ffffff29;
 }
 
-.play-button:hover span {
+.play-button:hover svg {
   background: none;
   transform: scale(1.5);
   transition: all 0.3s;
@@ -227,6 +232,10 @@
   fill: white;
 }
 
+.play-button svg {
+  fill: white;
+}
+
 .icon-wrapper .item-info .title {
   font-weight: bold;
 }
@@ -234,6 +243,35 @@
 .item-info .subtitle {
   font-size: 12px;
   color: #aaa;
+}
+
+.collapse-library-btn {
+  opacity: 0;
+  transform: translate(-20px, 0);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  display: flex;
+}
+
+.top-title {
+  transform: translate(-40px, 0);
+  transition: all 0.3s ease;
+  /* display: none; */
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 44px;
+}
+
+@container sidebar (min-width: 73px) {
+  #sidebar-left:hover .collapse-library-btn {
+    opacity: 1;
+    transform: translate(-10px, 0);
+    pointer-events: auto;
+  }
+  #sidebar-left:hover .top-title {
+    transform: translate(-10px, 0);
+  }
 }
 
 @container sidebar (min-width: 350px) {
@@ -260,6 +298,9 @@
 }
 
 @container sidebar (max-width: 72px) {
+  .collapse-library-btn {
+    display: none !important;
+  }
   .sidebar-container {
     padding: 5px;
     padding-bottom: 15px;
