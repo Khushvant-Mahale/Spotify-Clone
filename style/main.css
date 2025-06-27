@@ -202,12 +202,12 @@
   }
 }
 
-@media (max-width: 1007px) {
+/* @media (max-width: 1007px) {
   .main #sidebar-left {
     /* min-width: 0; */
-    /* width: 72px; */
+/* width: 72px; 
   }
-}
+} */
 
 .main .min-left-side#sidebar-left {
   min-width: 0;
