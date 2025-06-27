@@ -1,57 +1,67 @@
-# 🎧 Spotify Clone (Frontend) – HTML | CSS | JavaScript
+# 🎵 Spotify Clone - Web Music Player
 
-A **fully responsive** music web app with a custom UI inspired by Spotify 🎶  
-Built using **pure HTML, CSS, and JavaScript**, this clone loads songs dynamically from local folders and extracts metadata using `jsmediatags`.
+![banner](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/banner.jpg)
+
+A **fully functional, slick AF Spotify web clone** made using plain JavaScript, HTML, and CSS.  
+Supports **dynamic playlists**, **live music preview**, **repeat modes**, **shuffle**, **volume control**, and more.  
+💥 No frameworks. No BS. Just pure DOM domination 🧠💻
 
 ---
 
-## 🔥 Features
+## 🚀 Features
 
-- 🎨 **Custom Spotify-Inspired UI**
-- 📁 **Dynamic Folder-Based Song Loading**
-- 🖼️ **Album Art & Metadata Extraction**
-- 💻 **Fully Responsive Design**
-- 🧪 Built with **Vanilla JS (No frameworks)**
+| Feature                            | Status |
+| ---------------------------------- | ------ |
+| 🔥 Dynamic playlist & song loading | ✅     |
+| 🎧 Play/Pause per card and song    | ✅     |
+| 🔁 Repeat Modes (None, All, One)   | ✅     |
+| 🔀 Shuffle Mode                    | ✅     |
+| 🔊 Volume slider with mute toggle  | ✅     |
+| 🎚️ Audio feedback with synced UI   | ✅     |
+| 🎨 Slick CSS transitions & visuals | ✅     |
+| 📦 Organized file/folder structure | ✅     |
+| 🧠 Fully JS-powered Audio API      | ✅     |
 
 ---
 
 ## 📸 Screenshots
 
-| UI | Playlist View | Responsive Layout |
-|----|---------------|-------------------|
-| ![Home](screenshots/home.png) | ![Playlist](screenshots/playlist.png) | ![Mobile](screenshots/mobile.png) |
+> _Spoiler: Looks sexier live._
+
+![player-preview](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/preview1.jpg)
+![cards](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/preview2.jpg)
 
 ---
 
-## ⚙️ Tech Stack
+## 🧠 Tech Stack
 
-| Tech | Usage |
-|------|--------|
-| HTML5 | Page structure |
-| CSS3 | Custom UI styling |
-| JavaScript | DOM manipulation, song loading |
-| jsmediatags | Read song metadata (title, artist, album art) |
-
----
-
-## 🧠 How It Works
-
-1. Fetches all `.mp3` files from a local folder (e.g., `/songs/`)
-2. Parses metadata using `jsmediatags`
-3. Displays song name, artist & album art on the fly
-4. Plays songs with custom controls and animation
+- 🟩 **Vanilla JavaScript**
+- 🟨 **HTML5**
+- 🎨 **CSS3**
+- 🎧 **HTML Audio API**
+- 📁 Dynamic `fetch()` + `info.json` loaders
 
 ---
 
-## 🚀Demo
+## 🛠 How It Works
 
-![Preview](screenshots/preview.mkv)
+- 📂 Music folders inside `/libraries/` are auto-scanned
+- 🎶 Playlists and songs are fetched dynamically
+- ⏯️ Every card and list item is playable
+- 🔁 Repeat & 🔀 shuffle modes handled via custom logic
+- 🔊 Volume control has dynamic slider + mute handling
+- UI updates stay in sync with playback status, current song, and player bar
 
 ---
 
-## 📂 Run Locally
+## 🧪 Try It Live
+
+> 🔗 Coming soon: Deploying to Netlify/GitHub Pages  
+> Until then, clone it locally:
 
 ```bash
-git clone https://github.com/your-username/spotify-clone.git
-cd spotify-clone
-# Open index.html in your browser (use Live Server or localhost)
+git clone https://github.com/Khushvant-Mahale/Spotify-Clone.git
+cd Spotify-Clone
+npx live-server
+# or use VS Code Live Server extension
+```
