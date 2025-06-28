@@ -65,6 +65,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentTimeEl = document.querySelector(".current-time");
   const totalTimeEl = document.querySelector(".total-time");
 
+  repeatMode = localStorage.getItem("repeatMode") || "none";
+  const repeatBtn = document.querySelector(".repeat");
+
+  repeatBtn.innerHTML = repeatIcons[repeatMode];
+  repeatBtn.setAttribute("data-mode", repeatMode);
+  repeatBtn.title = {
+    none: "Repeat None",
+    all: "Repeat all once",
+    one: "Repeat one Song",
+  }[repeatMode];
+
+  repeatBtn.style.fill = repeatMode === "none" ? "#535353" : "#1db954";
+
   if (!audio || !playBtn || !seekbar || !currentTimeEl || !totalTimeEl) {
     console.warn("Some player elements are missing 🫠");
     return;
@@ -92,16 +105,41 @@ document.addEventListener("DOMContentLoaded", () => {
   audio.addEventListener("loadedmetadata", () => {
     seekbar.max = 100;
     totalTimeEl.textContent = formatTime(audio.duration);
+
+    localStorage.setItem("currentTime", audio.currentTime);
   });
 
   playBtn.addEventListener("click", () => {
+    const audio = document.querySelector("audio");
+    const src = audio.src;
+
+    if (!src) return;
+
+    const currentLi = [...document.querySelectorAll(".library-item")].find(
+      (el) =>
+        new URL(el.getAttribute("data-src"), window.location.href).href === src
+    );
+
+    const currentCard = document.querySelector(
+      `.card[data-folder="${folderFromCurrentSong()}"]`
+    );
+    const cardBtn = currentCard?.querySelector(".play-button-cards");
+    const songBtn = currentLi?.querySelector(".play-button");
+
     if (isPlaying) {
       audio.pause();
       playBtn.innerHTML = playIconSVG();
+
+      if (songBtn) songBtn.innerHTML = playIconSVG();
+      if (cardBtn) cardBtn.innerHTML = playIconSVG();
     } else {
       audio.play();
       playBtn.innerHTML = stopIconSVG();
+
+      if (songBtn) songBtn.innerHTML = stopIconSVG();
+      if (cardBtn) cardBtn.innerHTML = stopIconSVG();
     }
+
     isPlaying = !isPlaying;
   });
 
@@ -158,6 +196,7 @@ const repeatIcons = {
 
 document.querySelector(".repeat").addEventListener("click", () => {
   const repeatBtn = document.querySelector(".repeat");
+  repeatBtn.setAttribute("data-mode", repeatMode); // ✔️ use repeatBtn instead of btn
 
   if (repeatMode === "none") {
     repeatMode = "all";
@@ -176,5 +215,6 @@ document.querySelector(".repeat").addEventListener("click", () => {
     repeatBtn.title = "Repeat None";
   }
 
-  btn.setAttribute("data-mode", repeatMode);
+  // btn.setAttribute("data-mode", repeatMode);
+  localStorage.setItem("repeatMode", repeatMode);
 });

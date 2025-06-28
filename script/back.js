@@ -13,6 +13,50 @@ const audio =
   document.querySelector("audio") ||
   document.body.appendChild(document.createElement("audio"));
 
+const volumeBtn = document.querySelector(".volume-btn");
+const volumeSlider = document.querySelector(".volume-slider");
+
+// 🎧 Restore volume
+const savedVolume = localStorage.getItem("volumeLevel");
+if (savedVolume !== null) {
+  audio.volume = parseFloat(savedVolume);
+  volumeSlider.value = savedVolume;
+  updateVolumeIcon(savedVolume);
+  updateSliderFill(volumeSlider);
+}
+
+const savedTime = localStorage.getItem("currentTime");
+if (savedTime) audio.currentTime = parseFloat(savedTime);
+
+// 🎶 Restore repeat/shuffle
+repeatMode = localStorage.getItem("repeatMode") || "none";
+shuffleMode = localStorage.getItem("shuffleMode") === "true";
+
+// 🎧 Restore playlist state
+const savedSongs = JSON.parse(localStorage.getItem("currentSongs") || "[]");
+const savedIndex = parseInt(localStorage.getItem("currentSongIndex"));
+const savedFolder = localStorage.getItem("currentFolder");
+const savedCover = localStorage.getItem("coverArt");
+const savedTitle = localStorage.getItem("trackTitle");
+const savedPlaylistPath = localStorage.getItem("currentPlaylistPath");
+
+if (savedSongs.length > 0 && savedIndex >= 0) {
+  currentSongs = savedSongs;
+  currentSongIndex = savedIndex;
+  currentFolder = savedFolder;
+  currentPlaylistPath = savedPlaylistPath;
+
+  audio.src = savedSongs[savedIndex];
+
+  document.querySelector(".cover-art img").src =
+    savedCover || "default-cover.jpg";
+  document.querySelector(".track-title a").textContent =
+    savedTitle || "Unknown";
+  document.querySelector(".track-artists").textContent = "Unknown Artist";
+  document.querySelector(".current-time").textContent = "0:00";
+  document.querySelector(".total-time").textContent = "0:00";
+}
+
 function shuffleBtn() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="#535353" role="img">
@@ -22,10 +66,6 @@ function shuffleBtn() {
                                 d="M2 18C2 18.5523 2.44772 19 3 19H6.92963C7.93269 19 8.86939 18.4987 9.42578 17.6641L10.8321 15.5547C11.1384 15.0952 11.0142 14.4743 10.5547 14.1679C10.0952 13.8616 9.4743 13.9858 9.16795 14.4453L7.76168 16.5547C7.57622 16.8329 7.26399 17 6.92963 17H3C2.44772 17 2 17.4477 2 18ZM13.4855 9.85749C13.9591 10.1416 14.5733 9.98808 14.8575 9.5145L15.7749 7.98551C15.9556 7.6843 16.2811 7.5 16.6324 7.5H21C21.3844 7.5 21.7348 7.27965 21.9013 6.93319C22.0678 6.58672 22.021 6.17548 21.7809 5.87531L19.7809 3.37531C19.4359 2.94404 18.8066 2.87412 18.3753 3.21913C17.944 3.56414 17.8741 4.19343 18.2191 4.62469L18.9194 5.5H16.6324C15.5786 5.5 14.6021 6.0529 14.0599 6.95651L13.1425 8.4855C12.8584 8.95908 13.0119 9.57334 13.4855 9.85749Z" />
                         </svg>`;
 }
-
-const volumeBtn = document.querySelector(".volume-btn");
-const volumeSlider = document.querySelector(".volume-slider");
-
 // Initial volume
 audio.volume = 1;
 updateSliderFill(volumeSlider);
@@ -35,6 +75,8 @@ volumeSlider.addEventListener("input", () => {
   audio.volume = value;
   updateVolumeIcon(value);
   updateSliderFill(volumeSlider);
+
+  localStorage.setItem("volumeLevel", value);
 });
 
 function updateSliderFill(slider) {
@@ -291,15 +333,35 @@ function playSongAt(index) {
   document.querySelector(".track-artists").textContent = "Unknown Artist";
   document.querySelector(".current-time").textContent = "0:00";
   document.querySelector(".total-time").textContent = "0:00";
+
+  localStorage.setItem("currentSongIndex", currentSongIndex);
+  localStorage.setItem("currentFolder", currentFolder);
+  localStorage.setItem("currentSongs", JSON.stringify(currentSongs));
+  localStorage.setItem("currentPlaylistPath", currentPlaylistPath);
+  localStorage.setItem(
+    "coverArt",
+    document.querySelector(".cover-art img").src
+  );
+  localStorage.setItem(
+    "trackTitle",
+    document.querySelector(".track-title a").textContent
+  );
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".card").forEach((card) => {
     card.addEventListener("click", async (item) => {
+      // remove from all cards first
+      document
+        .querySelectorAll(".card")
+        .forEach((c) => c.classList.remove("active-card"));
+
       const folder = item.currentTarget.dataset.folder;
       const imgSrc = item.currentTarget.querySelector("img")?.src || "";
       console.log("🎯 Card clicked. Folder:", folder);
       await getSongs(folder, imgSrc);
+
+      item.currentTarget.classList.add("active-card");
     });
   });
 });
@@ -323,6 +385,25 @@ document.querySelector(".next").addEventListener("click", () => {
   } else if (currentSongIndex < currentSongs.length - 1) {
     playSongAt(currentSongIndex + 1);
   }
+});
+
+document.addEventListener("click", () => {
+  // 🎯 Get the current playing song src
+  const currentSrc = document.querySelector("audio")?.src;
+
+  // 🧼 Remove 'active-song' from ALL songs
+  document.querySelectorAll(".library-item").forEach((item) => {
+    item.classList.remove("active-song");
+  });
+
+  // ✅ Highlight the currently playing one
+  document.querySelectorAll(".library-item").forEach((item) => {
+    const itemSrc = new URL(item.getAttribute("data-src"), window.location.href)
+      .href;
+    if (itemSrc === currentSrc) {
+      item.classList.add("active-song");
+    }
+  });
 });
 
 document.addEventListener("click", function (e) {
@@ -370,6 +451,7 @@ document.addEventListener("click", function (e) {
       audio.pause();
       li.querySelector(".play-button").innerHTML = playIconSVG(); // show play icon
       document.querySelector(".play").innerHTML = playIconSVG();
+      let btn = document.querySelectorAll(".play-button-cards");
       toggleCardIcons(btn);
     }
     return;
@@ -378,6 +460,14 @@ document.addEventListener("click", function (e) {
   // 🆕 Play new song
   audio.src = src;
   audio.play();
+
+  // 🧼 Remove 'active-song' from ALL items
+  document.querySelectorAll(".library-item").forEach((el) => {
+    el.classList.remove("active-song");
+  });
+
+  // ✅ Add 'active-song' to the clicked one
+  li.classList.add("active-song");
 
   // ⏸️ Show correct icon for current song
   li.querySelector(".play-button").innerHTML = stopIconSVG();
@@ -459,11 +549,15 @@ document.addEventListener("click", async (e) => {
         // 🔥 Find and update the icon of currently playing song
         const src = audio.src;
         document.querySelectorAll(".library-item").forEach((li) => {
-          const itemSrc = li.getAttribute("data-src");
+          const itemSrc = new URL(
+            li.getAttribute("data-src"),
+            window.location.href
+          ).href;
+          const audioSrc = audio.src;
           const wrapper = li.querySelector(".play-button");
           if (!wrapper) return;
 
-          if (itemSrc === src) {
+          if (itemSrc === audioSrc) {
             wrapper.innerHTML = stopIconSVG(); // current song 🔁
           } else {
             wrapper.innerHTML = playIconSVG(); // others back to ▶️
@@ -554,6 +648,8 @@ document.querySelector(".play").addEventListener("click", () => {
 
 document.querySelector(".shuffle").addEventListener("click", () => {
   shuffleMode = !shuffleMode;
+
+  localStorage.setItem("shuffleMode", shuffleMode);
 
   const btn = document.querySelector(".shuffle");
   btn.setAttribute("data-enabled", shuffleMode.toString());

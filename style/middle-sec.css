@@ -134,6 +134,11 @@
   bottom: 10%;
 }
 
+.card.active-card .play-button-cards {
+  opacity: 1;
+  bottom: 10%;
+}
+
 .info h3 {
   font-size: 1em;
   /* display: none; */
