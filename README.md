@@ -1,6 +1,6 @@
 # 🎵 Spotify Clone - Kashuv's Web Music Player
 
-![banner](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/banner.jpg)
+![banner](https://github.com/Khushvant-Mahale/Spotify-Clone/raw/main/assets/banner.jpg)
 
 A **fully functional Spotify-inspired web music player** with 🔁 Repeat Modes, 🔀 Shuffle, 🎚️ Volume Control, and 🔥 Dynamic Playlists – built completely with **Vanilla JavaScript**.  
 No frameworks. No shortcuts. Just clean code, raw logic, and absolute DOM domination 🧠💻
@@ -35,8 +35,8 @@ No frameworks. No shortcuts. Just clean code, raw logic, and absolute DOM domina
 
 > _100% Custom Styled. Clean AF._
 
-![player-preview](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/preview1.jpg)
-![cards](https://github.com/Khushvant-Mahale/Spotify-Clone/assets/preview2.jpg)
+![player-preview](https://github.com/Khushvant-Mahale/Spotify-Clone/raw/main/assets/preview1.jpg)
+![cards](https://github.com/Khushvant-Mahale/Spotify-Clone/raw/main/assets/preview2.jpg)
 
 ---
 
